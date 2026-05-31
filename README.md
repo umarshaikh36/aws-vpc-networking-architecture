@@ -1,126 +1,170 @@
-# 🚀 AWS VPC Networking Architecture — Hands-On Cloud Project
-
-> A practical AWS networking project where I designed and configured a secure multi-tier VPC environment from scratch in the **Mumbai (ap-south-1)** region.
-
----
+# 🌐 AWS Custom VPC Networking Architecture
 
 ## 📌 Project Overview
 
-This project demonstrates real-world AWS cloud networking skills by building a fully functional, secure VPC architecture with isolated environments, controlled traffic flow, and verified inter-VPC communication.
+This project demonstrates the design and implementation of a custom AWS networking architecture using Virtual Private Clouds (VPCs), public and private subnets, route tables, Internet Gateway, and VPC Peering.
+
+The objective was to gain hands-on experience with AWS networking fundamentals and secure communication between isolated environments while following cloud networking best practices.
 
 ---
 
-## 🏗️ Architecture Diagram
+## 🏗️ Architecture Overview
 
+### Environment Design
+
+#### Test VPC
+
+* CIDR Block: `10.0.0.0/24`
+* Public Subnet
+* Private Subnet
+
+#### Production VPC
+
+* CIDR Block: `192.0.0.0/16`
+* Public Subnet
+* Private Subnet
+
+#### Connectivity Components
+
+* Internet Gateway (IGW)
+* Route Tables
+* Security Groups
+* VPC Peering Connection
+* EC2 Instances for Connectivity Testing
+
+---
+
+## 🔧 AWS Services Used
+
+* Amazon VPC
+* Public Subnets
+* Private Subnets
+* Internet Gateway
+* Route Tables
+* Security Groups
+* VPC Peering
+* Amazon EC2
+
+---
+
+## 🚀 Implementation Steps
+
+### 1. Created Custom VPCs
+
+Created separate VPCs for:
+
+* Test Environment
+* Production Environment
+
+Configured unique CIDR ranges to avoid network overlap.
+
+---
+
+### 2. Configured Public and Private Subnets
+
+Created subnet architecture within each VPC:
+
+* Public Subnet for internet-facing resources
+* Private Subnet for internal resources
+
+---
+
+### 3. Attached Internet Gateway
+
+Configured an Internet Gateway for public subnet access and associated appropriate route tables.
+
+---
+
+### 4. Created Custom Route Tables
+
+Implemented route table configurations to:
+
+* Enable internet connectivity for public resources
+* Control internal network communication
+* Support VPC Peering routes
+
+---
+
+### 5. Established VPC Peering
+
+Created and accepted a VPC Peering Connection between:
+
+* Test VPC
+* Production VPC
+
+Updated route tables to enable private communication between both networks.
+
+---
+
+### 6. Configured Security Groups
+
+Applied security group rules to:
+
+* Allow ICMP traffic for testing
+* Permit required communication between instances
+* Follow network segmentation principles
+
+---
+
+### 7. Connectivity Validation
+
+Launched EC2 instances in both VPCs and verified connectivity using:
+
+```bash
+ping <private-ip-address>
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    AWS Mumbai Region                    │
-│                                                         │
-│  ┌──────────────────────┐   VPC Peering   ┌──────────────────────┐  │
-│  │    Test VPC          │◄───────────────►│  Production VPC      │  │
-│  │   10.0.0.0/24        │                 │   192.0.0.0/16       │  │
-│  │                      │                 │                      │  │
-│  │  ┌────────────────┐  │                 │  ┌────────────────┐  │  │
-│  │  │ Public Subnet  │  │                 │  │ Public Subnet  │  │  │
-│  │  │  (Internet GW) │  │                 │  │  (Internet GW) │  │  │
-│  │  └────────────────┘  │                 │  └────────────────┘  │  │
-│  │  ┌────────────────┐  │                 │  ┌────────────────┐  │  │
-│  │  │ Private Subnet │  │                 │  │ Private Subnet │  │  │
-│  │  │  (Isolated)    │  │                 │  │  (Isolated)    │  │  │
-│  │  └────────────────┘  │                 │  └────────────────┘  │  │
-│  └──────────────────────┘                 └──────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
-```
+
+Successfully confirmed communication across VPCs through the peering connection.
 
 ---
 
-## ✅ Project Highlights
+## ✅ Project Outcome
 
-| Feature | Details |
-|---|---|
-| **Test VPC CIDR** | `10.0.0.0/24` |
-| **Production VPC CIDR** | `192.0.0.0/16` |
-| **Region** | Mumbai (`ap-south-1`) |
-| **Subnet Types** | Public + Private across Availability Zones |
-| **Connectivity** | VPC Peering for secure inter-VPC communication |
-| **Testing** | EC2 instances with ICMP (ping) verification |
+Successfully designed and implemented a secure multi-tier AWS networking architecture featuring:
 
----
-
-## 🛠️ What Was Built
-
-- **Custom VPCs** — Created separate VPCs for test and production environments
-- **Public & Private Subnets** — Configured across multiple availability zones for redundancy
-- **Internet Gateway** — Attached to public subnets for outbound internet connectivity
-- **Custom Route Tables** — Designed for controlled and deliberate traffic flow
-- **VPC Peering Connection** — Established secure communication between test and production VPCs
-- **Private Communication** — Enabled isolated network-to-network connectivity
-- **Security Groups** — Applied least-privilege rules and network segmentation best practices
-- **Connectivity Testing** — Verified end-to-end communication using EC2 instances and ICMP ping
+* Multiple VPCs
+* Public and Private Subnets
+* Internet Gateway Connectivity
+* Route Table Management
+* VPC Peering
+* Inter-VPC Communication
+* Security Group Configuration
 
 ---
 
-## 🧱 Architecture Components
+## 🎯 Key Learnings
 
-### VPCs
-| Environment | CIDR Block |
-|---|---|
-| Test | `10.0.0.0/24` |
-| Production | `192.0.0.0/16` |
-
-### Subnets
-- Public subnets with Internet Gateway routes
-- Private subnets isolated from direct internet access
-
-### Networking Resources
-- **Internet Gateways** — One per VPC for public subnet internet access
-- **Route Tables** — Custom tables per subnet for precise traffic control
-- **VPC Peering** — Enables secure, private communication between test and production
-- **Security Groups** — Stateful firewall rules applied at the instance level
+* AWS VPC Design
+* CIDR Planning
+* Public vs Private Subnets
+* Internet Gateway Configuration
+* Route Table Management
+* VPC Peering Concepts
+* Security Group Best Practices
+* Cloud Network Segmentation
+* Network Troubleshooting
 
 ---
 
-## 🔑 Key Skills Practiced
+## 🔮 Future Enhancements
 
-`AWS VPC` · `Subnets` · `Route Tables` · `Internet Gateway` · `Security Groups` · `EC2` · `VPC Peering` · `Cloud Networking`
-
----
-
-## 📚 What I Learned
-
-- How to design and implement a **multi-tier VPC architecture** from scratch
-- The difference between **public and private subnet** configurations and their use cases
-- How **VPC Peering** works and how to configure routing for inter-VPC communication
-- How to apply **security groups and network segmentation** best practices
-- Hands-on troubleshooting of connectivity using **EC2 and ICMP testing**
-- Importance of **route table design** for secure, intentional traffic flow
-
+* NAT Gateway Implementation
+* Bastion Host Deployment
+* Multi-AZ Architecture
+* Site-to-Site VPN Connectivity
+* Transit Gateway Integration
+* Network ACL Configuration
+* AWS Network Firewall
 
 ---
 
-## 🚀 How to Replicate This Project
-
-1. **Log in to AWS Console** and navigate to the VPC service in the Mumbai region (`ap-south-1`)
-2. **Create Test VPC** with CIDR `10.0.0.0/24`
-3. **Create Production VPC** with CIDR `192.0.0.0/16`
-4. **Create subnets** (public + private) in each VPC across at least 2 AZs
-5. **Attach Internet Gateways** to both VPCs
-6. **Create and associate Route Tables** — route public subnets through IGW
-7. **Create a VPC Peering Connection** between the two VPCs and accept it
-8. **Update route tables** in both VPCs to allow peered CIDR traffic
-9. **Launch EC2 instances** in each VPC and verify connectivity with ping (ICMP)
-10. **Apply Security Groups** to allow ICMP and restrict unnecessary traffic
-
----
-
-## 👤 Author
+## 👨‍💻 Author
 
 **Umar Shaikh**
-- IT Engineer | AWS Certified Solutions Architect – Associate
-- Cloud & DevOps Enthusiast
 
----
+AWS Certified Solutions Architect – Associate
 
-## 🏷️ Tags
+### Connect With Me
 
-`#AWS` `#CloudComputing` `#AWSVPC` `#DevOps` `#CloudNetworking` `#HandsOnCloud`
+* LinkedIn: https://www.linkedin.com/in/umarshaikh1822
+* GitHub: https://github.com/umarshaikh36
