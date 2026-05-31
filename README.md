@@ -95,19 +95,6 @@ This project demonstrates real-world AWS cloud networking skills by building a f
 - Hands-on troubleshooting of connectivity using **EC2 and ICMP testing**
 - Importance of **route table design** for secure, intentional traffic flow
 
----
-
-## 📸 Screenshots
-
-> AWS Console screenshots showing the VPC Resource Map, Subnets, Route Tables, and Network Connections.
-
-*(Add your screenshots to a `/screenshots` folder and reference them here)*
-
-```markdown
-![VPC Resource Map](screenshots/vpc-resource-map.png)
-![Subnet Configuration](screenshots/subnets.png)
-![Route Tables](screenshots/route-tables.png)
-```
 
 ---
 
